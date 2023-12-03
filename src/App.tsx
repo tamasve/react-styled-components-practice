@@ -1,5 +1,5 @@
 import './App.css'
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 /**
  * https://styled-components.com/docs
@@ -106,11 +106,6 @@ const TextInput = styled.textarea`
     font-size: 2rem;
     padding: 0.5em;
 `
-const FlexMain = styled.main`
-    display: flex;
-    flex-direction: row;
-    gap: 1em;
-`
 
 // A general section element with unique style (flex) for all children divs
 // + inner classes for making yellow background, thick green border (any children can have them)
@@ -125,6 +120,10 @@ const FlexSection = styled.section`
 
     .greenBorder {
         border: 3px solid green;
+    }
+
+    .bigger {
+        font-size: 4em;
     }
 `
 
@@ -157,17 +156,40 @@ const LabelText = styled.label`
     }}
 `
 
-const DynSizedLabel = styled.label.attrs<{ $size: string; }>(
+const DynSizedLabel = styled.label.attrs<{ $size?: string; }>(
     props => ({
         $size: props.$size || "1em",
-        $num: props.$size.charAt(0)*1
+        $num: +(props.$size || "1em").charAt(0) * 1 - 1
     })
 )`
     font-size: ${props => props.$size};
     padding: ${props => props.$size};
-    background-color: ${props => ["red", "green"][props.$num]}
+    background-color: ${props => ["pink", "lightgreen", "aqua"][props.$num]}
 `
-// the last one does not work...
+
+// Animation: with the 'keyframes' function of styled-components
+const rotate = keyframes`
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+`;
+
+const RotateSlow = styled.div`
+    display: inline-block;
+    animation: ${rotate} 3s linear infinite;
+    padding: 2rem 1rem;
+    font-size: 1.2rem;
+`
+
+const RotateRapid = styled.div`
+    display: inline-block;
+    animation: ${rotate} 1s linear infinite;
+    padding: 2rem 1rem;
+    font-size: 1.2rem;
+`
 
 
 function App() {
@@ -234,7 +256,10 @@ function App() {
                         <TextInput className='yellowBackgr greenBorder' />
                     </FlexSection>
 
-                    <DynSizedLabel $size='2em'>Hello</DynSizedLabel>
+                    <DynSizedLabel $size="3em">Hello</DynSizedLabel>
+
+                    <RotateSlow>What do you see?</RotateSlow>
+                    <RotateRapid className='bigger'>🏈</RotateRapid>
 
                 </FlexSection>
             </Wrapper>
