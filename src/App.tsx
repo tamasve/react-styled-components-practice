@@ -57,10 +57,11 @@ const Button = styled.button<{ $primary?: boolean; $size?: string; }>`
 // & ~ &: sibling, but maybe not directly next to
 // &.classname: if it also has classname class
 // .classname &: inside an element that has classname class
+// &&: 1 instance only
 
 
 // Using parameter version 2 - if it is a boolean, we can use it or leave it...
-const Button2 = styled.button<{$primary: boolean;}>`
+const Button2 = styled.button<{$primary?: boolean;}>`
     background: ${props => props.$primary ? "green" : "white"};
     color: ${props => props.$primary ? "white" : "green"};
     border-radius: 1em;
@@ -95,6 +96,7 @@ const ExtButton = styled(Button)`
 //     </a>
 //   );
 
+// here children = simple text...
 const ReversedButton = props => <Button {...props} children={props.children.split('').reverse()} />
 
 const ButtonWithSpaces = props => <Button {...props} children={props.children.split('').join(" .")} />
@@ -107,6 +109,7 @@ const TextInput = styled.textarea`
     padding: 0.5em;
 `
 
+// INNER CLASSES: any child can use them
 // A general section element with unique style (flex) for all children divs
 // + inner classes for making yellow background, thick green border (any children can have them)
 const FlexSection = styled.section`
@@ -127,12 +130,12 @@ const FlexSection = styled.section`
     }
 `
 
-// Styled checkbox... attrs: constructor with attributes
+// Styled checkbox... attrs: constructor with attributes - this is a simple checkbox
 const CheckBox = styled.input.attrs({ type: "checkbox" })``;
 // ... with Label text styled using switch command and checking-dependent style
 // using &&: 1 instance:
 // ${CheckBox}:checked + && {...} = when the relevant checkbox gets checked this instance gets the following css...
-const LabelText = styled.label`
+const LabelText = styled.label<{$mode: string;}>`
     padding: 0.3em;
     ${props => {
         switch (props.$mode) {
@@ -156,6 +159,7 @@ const LabelText = styled.label`
     }}
 `
 
+// property defined inside
 const DynSizedLabel = styled.label.attrs<{ $size?: string; }>(
     props => ({
         $size: props.$size || "1em",
@@ -233,7 +237,7 @@ function App() {
                     </FlexSection>
 
                     <FlexSection>
-                        <h2>Awful parrot-style buttons :) demonstrate number parameter</h2>
+                        <h2>Awful parrot-style buttons :) demonstrate number parameter usage</h2>
                         <div>
                             {[1,3,8,7,10,2,4,6,9].map((key, value) =>
                                 <MultiColoredButton key={key} $color={value}>button{value}</MultiColoredButton>
@@ -251,7 +255,7 @@ function App() {
                             <CheckBox />
                             <LabelText $mode="light">Light</LabelText>
                         </div>
-                        <h2>The elements with yellow background or thick green border (inner classes)</h2>
+                        <h2>The elements with yellow background or thick green border (inner classes of FlexSection div)</h2>
                         <Button className='yellowBackgr'>Yellow</Button>
                         <TextInput className='yellowBackgr greenBorder' />
                     </FlexSection>
