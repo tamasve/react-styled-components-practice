@@ -239,7 +239,7 @@ function App() {
                     <FlexSection>
                         <h2>Awful parrot-style buttons :) demonstrate number parameter usage</h2>
                         <div>
-                            {[1,3,8,7,10,2,4,6,9].map((key, value) =>
+                            {[1,3,8,7,10,2,4,6,9,5,11].map((key, value) =>
                                 <MultiColoredButton key={key} $color={value}>button{value}</MultiColoredButton>
                             )}
                         </div>
