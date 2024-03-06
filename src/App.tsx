@@ -2,6 +2,10 @@ import './App.css'
 import styled, { css, keyframes } from 'styled-components';
 
 /**
+ * A bunch of all the stuff here together...
+ * 
+ * Practices based upon the docs:
+ * 
  * https://styled-components.com/docs
  * 
  * Going through this doc practicing with my ideas...
@@ -10,23 +14,29 @@ import styled, { css, keyframes } from 'styled-components';
  * 
  * https://www.freecodecamp.org/news/styled-components-in-react/
  * Next part: Props in Styled Components
+ * 
+ * Basic syntax:
+ * = style.<html element>` `
  */
 
 
 const Title = styled.h1`
-    font-family: Verdana;
-    font-size: 1.5em;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 3em;
     text-align: center;
     color: blue;
+    font-style: oblique;
     margin-bottom: 2em;
+    padding-top: 0.5em;
 `
 
 const Wrapper = styled.section`
-    padding: 4em;
+    padding: 0 2em;
     background: papayawhip;
+    border-radius: 2em;
 `
 
-// Using parameter (if it is a boolean, we can use it or leave it (? sign)...)
+// Using parameter (if it is a boolean, we can use it or leave it (? sign for optional)...)
 // or using the || we can give default value in case we leave param
 const Button = styled.button<{ $primary?: boolean; $size?: string; }>`
     background: transparent;
@@ -52,11 +62,12 @@ const Button = styled.button<{ $primary?: boolean; $size?: string; }>`
         background: linear-gradient(magenta,green);
     }
 `
+// REFERING TO STYLE DEF: &
 // &: all instances of the component
 // & + &: directly next to
 // & ~ &: sibling, but maybe not directly next to
-// &.classname: if it also has classname class
-// .classname &: inside an element that has classname class
+// &.classname: if it also has 'classname' class
+// .classname &: inside an element that has 'classname' class
 // &&: 1 instance only
 
 
@@ -70,7 +81,7 @@ const Button2 = styled.button<{$primary?: boolean;}>`
     padding: 0.25em 1em;
 `
 
-// Using a number parameter:
+// Using a NUMBER parameter: for setting font color, bg and border
 const colors = ["white", "red", "green", "yellow", "blue", "black", "gray", "aquamarine", "magenta", "brown", "pink"];
 const count = colors.length;
 
@@ -83,13 +94,13 @@ const MultiColoredButton = styled.button<{$color: number;}>`
     padding: 0.25em 1em;
 `
 
-// Extended style
+// EXTENDED STYLE:  plus props, overriden props - styled(Comp name)` `
 const ExtButton = styled(Button)`
     border-radius: 3em;
-    color: red;
+    color: #f5e50a;
     border-color: red;
 `
-// This can work also for any non-styled-comp., but through the className handed over in props:
+// This can also work for any non-styled-comp., but it is necessary to hand over the className in props:
 // const Link = ({ className, children }) => (
 //     <a className={className}>
 //       {children}
@@ -111,7 +122,8 @@ const TextInput = styled.textarea`
 
 // INNER CLASSES: any child can use them
 // A general section element with unique style (flex) for all children divs
-// + inner classes for making yellow background, thick green border (any children can have them)
+// + inner classes for making yellow background, thick green border, bigger font size
+// (any children can have them!)
 const FlexSection = styled.section`
     display: flex;
     flex-direction: column;
@@ -215,8 +227,10 @@ function App() {
                             <Button>Click!</Button>
                             <Button $primary >Primary Click!</Button>
                             <ExtButton>Extended Button style</ExtButton>
+                            <p>a paragraph in order for the next button to be alone...</p>
+                            <Button $primary >Primary Click!</Button>
                             <br /><br />
-                            <Button $size={"2em"}>Double size!</Button>
+                            <Button $size={"2em"} style={{background: "pink"}}>Double size with prop - Pink bg with inline styling</Button>
                         </div>
                     </FlexSection>
 
@@ -240,7 +254,7 @@ function App() {
                         <h2>Awful parrot-style buttons :) demonstrate number parameter usage</h2>
                         <div>
                             {[1,3,8,7,10,2,4,6,9,5,11].map((key, value) =>
-                                <MultiColoredButton key={key} $color={value}>button{value}</MultiColoredButton>
+                                <MultiColoredButton key={key} $color={value}> button{value} </MultiColoredButton>
                             )}
                         </div>
                     </FlexSection>
