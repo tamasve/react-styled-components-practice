@@ -29,7 +29,7 @@ function App() {
                 <Title>~~ Styled Components ~~</Title>
                 
                 <Routes>
-                    <Route path="/" element={<Image src="/autumn forest.jpg" alt="no image" />} />
+                    <Route path="/" element={<Image src="/autumn-forest.jpg" alt="autumn forest" />} />
                     <Route path="/practices" element={<Practices />} />
                     <Route path="/products" element={<Products />} />
                 </Routes>
