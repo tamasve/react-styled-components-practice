@@ -19,13 +19,13 @@ import styled, { css, keyframes } from 'styled-components';
  */
 
 
-const Title = styled.h1`
+export const Title = styled.h1`
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 3em;
     text-align: center;
     color: blue;
     font-style: oblique;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
     padding-top: 0.5em;
 `
 
@@ -94,17 +94,17 @@ const MultiColoredButton = styled.button<{$color: number;}>`
 `
 
 // EXTENDED STYLE:  plus props, overriden props - styled(Comp name)` `
-const ExtButton = styled(Button)<{$blackFont: boolean;}>`
+export const ExtButton = styled(Button)<{$blackFont: boolean;}>`
     border-radius: 3em;
     color: ${props => props.$blackFont ? "black": "yellow" };
     border-color: red;
 `
-// This can also work for any non-styled-comp., but it is necessary to hand over the className in props:
-// const Link = ({ className, children }) => (
-//     <a className={className}>
-//       {children}
-//     </a>
-//   );
+// This can also work for any non styled-comp., but it is necessary to hand over the className in the props:
+const Link = ({ className, children }: { className: string, children: React.ReactNode }) => (
+    <a className={className}>
+      {children}
+    </a>
+  );
 
 // here children = simple text...
 const ReversedButton = props => <Button {...props} children={props.children.split('').reverse()} />
@@ -143,6 +143,7 @@ const FlexSection = styled.section`
 
 // Styled checkbox... attrs: constructor with attributes - this is a simple checkbox
 const CheckBox = styled.input.attrs({ type: "checkbox" })``;
+// Using switch...case structure
 // ... with Label text styled using switch command and checking-dependent style
 // using &&: 1 instance:
 // ${CheckBox}:checked + && {...} = when the relevant checkbox gets checked this instance gets the following css...
