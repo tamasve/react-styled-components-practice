@@ -93,13 +93,13 @@ const MultiColoredButton = styled.button<{$color: number;}>`
     padding: 0.25em 1em;
 `
 
-// EXTENDED STYLE:  plus props, overriden props - styled(Comp name)` `
+// EXTENDED STYLE:  plus props, overriden props - styled(Comp name)` ` - this works for every component! (also for React components)
 export const ExtButton = styled(Button)<{$blackFont: boolean;}>`
     border-radius: 3em;
     color: ${props => props.$blackFont ? "black": "yellow" };
     border-color: red;
 `
-// This can also work for any non styled-comp., but it is necessary to hand over the className in the props:
+// This can also work for any html tag, but it is necessary to hand over the className in the props, that makes it a bit different:
 const Link = ({ className, children }: { className: string, children: React.ReactNode }) => (
     <a className={className}>
       {children}
@@ -217,7 +217,7 @@ export default function Practices() {
         <>
             <Wrapper>
                 <Title>
-                    Hello! Here come the styled-components!
+                    Styled-components practices...
                 </Title>
             
                 <FlexSection>
@@ -275,10 +275,10 @@ export default function Practices() {
                         <TextInput className='yellowBackgr greenBorder' />
                     </FlexSection>
 
-                    <DynSizedLabel $size="4em"> Dynamicly sized and colored labels </DynSizedLabel>
-                    <DynSizedLabel $size="3em"> Dynamicly sized and colored labels </DynSizedLabel>
-                    <DynSizedLabel $size="2em"> Dynamicly sized and colored labels </DynSizedLabel>
-                    <DynSizedLabel > Dynamicly sized and colored labels </DynSizedLabel>
+                    <DynSizedLabel $size="4em"> Label with parametrized size and color </DynSizedLabel>
+                    <DynSizedLabel $size="3em"> Label with parametrized size and color </DynSizedLabel>
+                    <DynSizedLabel $size="2em"> Label with parametrized size and color </DynSizedLabel>
+                    <DynSizedLabel > Label with parametrized size and color </DynSizedLabel>
 
                     <RotateSlow>😎 What do you see? 😎</RotateSlow>
                     <RotateRapid className='bigger'>🏈</RotateRapid>
