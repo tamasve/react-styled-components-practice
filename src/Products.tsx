@@ -79,6 +79,12 @@ export default function Products() {
         unit: ""
     });
 
+    const [actProd, setActProd] = useState<ProductStruct>({
+        name: "",
+        category: "",
+        unit: ""
+    });
+
     const valueSetter = (key: string, value: string) => {
         let newProd: ProductStruct = {...prod, [key]: value};   // change the prop to the new value
         setProd(newProd);
@@ -86,7 +92,15 @@ export default function Products() {
     }
 
     const saveValue = () => {
-        console.log(prod);
+        setActProd(prod);
+    }
+
+    const resetValue = () => {
+        setProd({
+            name: "",
+            category: "",
+            unit: ""
+        });
     }
 
     return (
@@ -108,6 +122,12 @@ export default function Products() {
                 </Section>
                 <Section>
                     <Button onClick={saveValue}>Save product data</Button>
+                </Section>
+                <Section>
+                    <Button onClick={resetValue}>Reset values</Button>
+                </Section>
+                <Section>
+                    <TextLabel>Your product: {actProd.name} / {actProd.category} / {actProd.unit}</TextLabel>
                 </Section>
             </Frame>
         </>

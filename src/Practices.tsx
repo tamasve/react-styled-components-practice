@@ -197,14 +197,14 @@ const rotate = keyframes`
 
 const RotateSlow = styled.div`
     display: inline-block;
-    animation: ${rotate} 3s linear infinite;
+    animation: ${rotate} 3s linear infinite alternate;
     padding: 2rem 1rem;
     font-size: 1.5rem;
 `
 
 const RotateRapid = styled.div`
     display: inline-block;
-    animation: ${rotate} 1s linear infinite;
+    animation: ${rotate} 1s linear infinite reverse;
     padding: 2rem 1rem;
     font-size: 1.2rem;
 `
