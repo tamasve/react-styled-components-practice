@@ -19,13 +19,13 @@ import styled, { css, keyframes } from 'styled-components';
  */
 
 
-export const Title = styled.h1`
+export const Title = styled.h1<{$color?: string}>`
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 3em;
     text-align: center;
-    color: blue;
+    color: ${props => props.$color || "blue"};
     font-style: oblique;
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
     padding-top: 0.5em;
 `
 
@@ -81,7 +81,7 @@ const Button2 = styled.button<{$primary?: boolean;}>`
 `
 
 // Using a NUMBER parameter (as an index): for setting font color, bg and border
-const colors = ["white", "red", "green", "yellow", "blue", "black", "gray", "aquamarine", "magenta", "brown", "pink"];
+const colors = ["white", "red", "green", "yellow", "blue", "black", "gray", "aquamarine", "magenta", "brown", "pink", "orange", "purple", "whitesmoke", "tomato", "yellowgreen", "aquamarine"];
 const count = colors.length;
 
 const MultiColoredButton = styled.button<{$color: number;}>`
@@ -89,7 +89,7 @@ const MultiColoredButton = styled.button<{$color: number;}>`
     background-color: ${props => colors[(props.$color + 3) % count]};
     border-radius: 1em;
     border: 2px solid ${props => colors[(props.$color + 6) % count]};
-    margin: 0 1em;
+    margin: 0.5em 1em;
     padding: 0.25em 1em;
 `
 
@@ -216,7 +216,7 @@ export default function Practices() {
     return (
         <>
             <Wrapper>
-                <Title>
+                <Title $color='red'>
                     Styled-components practices...
                 </Title>
             
@@ -254,7 +254,7 @@ export default function Practices() {
                     <FlexSection>
                         <h2>Awful parrot-style buttons :) demonstrate number parameter usage</h2>
                         <div>
-                            {[1,3,8,7,10,2,4,6,9,5,11].map((key, value) =>
+                            {[14,1,12,3,8,7,13,10,2,4,6,15,0,9,5,11,16].map((key, value) =>
                                 <MultiColoredButton key={key} $color={value}> button{value} </MultiColoredButton>
                             )}
                         </div>
