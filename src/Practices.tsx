@@ -25,8 +25,9 @@ export const Title = styled.h1<{$color?: string}>`
     text-align: center;
     color: ${props => props.$color || "blue"};
     font-style: oblique;
-    margin-bottom: 0.5em;
-    padding-top: 0.5em;
+    margin-bottom: 0.2em;
+    padding-top: 0.1em;
+    padding-right: 1em;
 `
 
 const Wrapper = styled.section`

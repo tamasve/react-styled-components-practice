@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
 import Practices, { ExtButton, Title } from './Practices'
 import Products from './Products';
-import TicTacToe from './TicTacToe';
+import TicTacToe from './TicTacToe/TicTacToe';
 
 
 // small font color correction...
@@ -34,7 +34,7 @@ function App() {
                     <Route path="/" element={<Image src="/autumn-forest.jpg" alt="autumn forest" />} />
                     <Route path="/practices" element={<Practices />} />
                     <Route path="/products" element={<Products />} />
-                    <Route path="/tictactoe" element={<TicTacToe dim={8} />} />
+                    <Route path="/tictactoe" element={<TicTacToe dim={7} />} />
                 </Routes>
             </Router>
         </>
