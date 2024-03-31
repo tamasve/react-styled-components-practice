@@ -8,7 +8,7 @@ import styled, { css, keyframes } from 'styled-components';
  * https://styled-components.com/docs
  * 
  * Going through this doc practicing with my ideas...
- * 1-2 Dec 2023
+ * 1-2 Dec 2023 + Feb-March 2024
  * Next part: Overriding .attrs
  * 
  * https://www.freecodecamp.org/news/styled-components-in-react/
@@ -186,6 +186,29 @@ const DynSizedLabel = styled.label.attrs<{ $size?: string; }>(
     background-color: ${props => ["pink", "lightgreen", "aqua"][props.$num]}
 `
 
+
+// Using attrs() for inline styling >> practical if CSS changes too frequently (not a lightweight op.)
+// The attribute names can start with $ or not (anywhere?), prop. names are 'react'-ish!...
+// `` contains normal styling >> CSS class generated
+
+// the main points for inline styling:
+// .attrs<..params..>(props => ( {} ) )``   - for any inline property
+// .attrs<..params..>(props => ( {style: { ... } } ))``   - for inline style properties
+const Paragraph = styled.div.attrs<{$color: string, size: string, first?: string, second?: string, borderblue?: string}>(props => ({
+    style: {
+        color: props.$color,
+        fontSize: `${props.size}em`,
+        background: `linear-gradient(to left, ${props.first} 0%, ${props.second} 50%)`,
+        border: `3px solid rgb(0,0,${props.borderblue || 0})`
+    }
+    }))`
+        background-color: #75eb57;
+        width: 30vw;
+        margin: 1em auto;
+        border-radius: 0.5em;
+    `;
+
+
 // Animation: with the 'keyframes' function of styled-components
 const rotate = keyframes`
     from {
@@ -220,6 +243,10 @@ export default function Practices() {
                 <Title $color='red'>
                     Styled-components practices...
                 </Title>
+ 
+                <Paragraph $color="red" size="2" borderblue="230">colored paragraphs with inline styling using attrs()</Paragraph>
+                <Paragraph $color="blue" size="1.5">colored paragraphs with inline styling using attrs()</Paragraph>
+                <Paragraph $color="blue" size="1.5" first="#0fa" second="#df1" >colored paragraph with inline styling using attrs() + param. gradient bgr</Paragraph>
             
                 <FlexSection>
 
